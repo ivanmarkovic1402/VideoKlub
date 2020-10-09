@@ -1,4 +1,5 @@
-﻿@model IEnumerable<VideoKlub.Models.Movie>
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<VideoKlub.Models.Movie>
 @{
     ViewBag.Title = "Home Page";
 }
@@ -28,7 +29,7 @@
                 <td>@movie.NumberAvailable</td>
                 <td>@String.Format("{0:dd/MM/yyyy}", movie.DateAdded)</td>
                 
-            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || movie.AddedByUser == User.Identity.GetUserId()))
             {
                 <td>@Html.ActionLink("Edit", "Edit", "Movies", new { id = movie.Id }, null)</td>
                 <td>

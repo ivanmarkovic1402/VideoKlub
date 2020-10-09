@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 using VideoKlub.Models;
@@ -59,6 +60,7 @@ namespace VideoKlub.Controllers
             {
                 movie.DateAdded = DateTime.Now;
                 movie.NumberAvailable = movie.NumberInStock;
+                movie.AddedByUser = User.Identity.GetUserId();
 
                 _context.Movies.Add(movie);
             }
@@ -70,6 +72,7 @@ namespace VideoKlub.Controllers
                 movieInDb.NumberInStock = movie.NumberInStock;
                 movieInDb.NumberAvailable = movie.NumberAvailable;
                 movieInDb.GenreId = movie.GenreId;
+
             }
 
             _context.SaveChanges();

@@ -113,3 +113,4 @@ C:\Projects\VideoKlub\VideoKlub\obj\Debug\VideoKlub.Migrations.GenreTrable.resou
 C:\Projects\VideoKlub\VideoKlub\obj\Debug\VideoKlub.Migrations.PopulateGenreTable.resources
 C:\Projects\VideoKlub\VideoKlub\obj\Debug\VideoKlub.Migrations.PopulateMovieTable.resources
 C:\Projects\VideoKlub\VideoKlub\obj\Debug\VideoKlub.Migrations.dataAtributesAdded.resources
+C:\Projects\VideoKlub\VideoKlub\obj\Debug\VideoKlub.Migrations.addedByUseraddedToMovieModel.resources

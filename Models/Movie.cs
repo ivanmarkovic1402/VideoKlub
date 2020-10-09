@@ -27,5 +27,7 @@ namespace VideoKlub.Models
         [Required]
         [Display(Name = "Genre")]
         public int GenreId { get; set; }
+
+        public string AddedByUser { get; set; }
     }
 }
