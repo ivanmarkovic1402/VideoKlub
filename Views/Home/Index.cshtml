@@ -1,0 +1,57 @@
+﻿@model IEnumerable<VideoKlub.Models.Movie>
+@{
+    ViewBag.Title = "Home Page";
+}
+<div class="jumbotron">
+    <h1>Video Klub</h1>
+    <p>Video klub rentals app</p>
+</div>
+
+<div class="row">
+    <table class="table table-bordered">
+        <tr>
+            <th>Movie Name</th>
+            <th>Genre</th>
+            <th>Number Available</th>
+            <th>Date Added</th>
+            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <th></th>
+                <th></th>
+            }
+        </tr>
+        @foreach (var movie in Model)
+        {
+            <tr>
+                <td>@movie.Name</td>
+                <td>@movie.Genre.Name</td>
+                <td>@movie.NumberAvailable</td>
+                <td>@String.Format("{0:dd/MM/yyyy}", movie.DateAdded)</td>
+                
+            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <td>@Html.ActionLink("Edit", "Edit", "Movies", new { id = movie.Id }, null)</td>
+                <td>
+                    <a href="@Url.Action("Delete", "Movies", new {id = movie.Id})"  onclick = "return confirm('Are you sure you want to Delete?')">
+                        <svg width="1em" color="red" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                        </svg>
+                    </a>
+                </td>
+
+            }
+            </tr>
+        }
+    </table>
+</div>
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+
+        });
+
+    </script>
+}
