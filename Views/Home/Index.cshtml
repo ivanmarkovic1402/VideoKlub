@@ -9,6 +9,10 @@
     <h1>Video Klub</h1>
     <p>Video klub rentals app</p>
 </div>
+@Html.Partial("_Search")
+<div id="searchResult">
+
+</div>
 <div class="row">
     <table class="table table-bordered">
         <tr>
@@ -60,18 +64,31 @@
 
 
 
-    @section scripts
+@section scripts
 {
         <script>
 
-                    //$(document).ready(function () {
+             $(document).ready(function () {
+                 $('#searchBtn').on("click", function () {
+                     var search = $("#search").val();
+                     var searchResult = "";
+                     $("#searchResult").html("");
+                     $.ajax({
+                         url: "/Api/Search/",
+                         type: "GET",
+                         data: { search:search },
+                         success: function (res) {
+                             console.log(res);
+                             $("#searchResult").append("<table class='table table-bordered'><thead><tr><th>Movie Name</th><th>Number In Stock</th><th>Numbar Available</th><thead><tbody></tr></thead><tr><td>" + res.Name + "</td><td>" + res.NumberInStock + "</td><td>" + res.NumberAvailable + "</td></tr></tbody></table>");
+                         },
+                         error: function (res) {
+                             console.log(res);
 
-                    //    $('[id^=movie-id]').on("click", function () {
-                    //        var id = $(this).attr("data-id");
-                    //        console.log(id);
-
-                    //    });
-                    //});
+                             alert("Failed");
+                         }
+                     })
+                });
+             });
 
         </script>
     }

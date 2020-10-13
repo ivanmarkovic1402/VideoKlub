@@ -90,10 +90,5 @@ namespace VideoKlub.Controllers
         }
 
 
-        public ActionResult Search()
-        {
-            return RedirectToAction("Index", "Home");
-        }
-
     }
 }
