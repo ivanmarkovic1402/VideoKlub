@@ -63,7 +63,6 @@
 
 
 
-
 @section scripts
 {
         <script>
@@ -78,7 +77,6 @@
                          type: "GET",
                          data: { search:search },
                          success: function (res) {
-                             console.log(res);
                              $("#searchResult").append("<table class='table table-bordered'><thead><tr><th>Movie Name</th><th>Number In Stock</th><th>Numbar Available</th><thead><tbody></tr></thead><tr><td>" + res.Name + "</td><td>" + res.NumberInStock + "</td><td>" + res.NumberAvailable + "</td></tr></tbody></table>");
                          },
                          error: function (res) {
