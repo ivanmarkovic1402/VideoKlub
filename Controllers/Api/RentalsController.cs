@@ -1,5 +1,7 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
@@ -18,15 +20,19 @@ namespace VideoKlub.Controllers.Api
 
 
         [HttpGet]
-        public IEnumerable<Rental> GetRentals()
+        public IEnumerable<RentalDto> GetRentals()
         {
-            var rentals = _context.Rentals.ToList();
+            //var rentals = _context.Rentals
+            //                .Include(r => r.Movies)
+            //                .Include(r => r.User);
 
-            if (rentals == null)
+            var rentalsDto = _context.Rentals.Include(r => r.Movies).Include(r => r.User).ToList().Select(Mapper.Map<Rental, RentalDto>);
+
+            if (rentalsDto == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
                 //return NotFound();
 
-            return rentals;
+            return rentalsDto;
 
         }
 
@@ -49,17 +55,34 @@ namespace VideoKlub.Controllers.Api
         {
             var rental = new Rental();
 
+            //var user = _context.Users.Where(u => u.Id == rentalDto.UserId); 
+
             rental.MovieId = rentalDto.MovieId;
             rental.UserId = rentalDto.UserId;
             rental.DateRented = DateTime.Now;
+
+            var numberAvailableMovieInDb = _context.Movies.SingleOrDefault(m => m.Id == rentalDto.MovieId).NumberAvailable;
+            if (numberAvailableMovieInDb <= 0)
+                return BadRequest("No Available Movies");
 
             var movieInDb = _context.Movies.SingleOrDefault(m => m.Id == rentalDto.MovieId).NumberAvailable--;
 
             _context.Rentals.Add(rental);
             _context.SaveChanges();
 
-            //return Created(new Uri(Request.RequestUri + "/"), rentalDto);
-            return Ok();
+            return Created(new Uri(Request.RequestUri + "/"), rentalDto);
+            //return Ok();
+        }
+
+        [HttpPut]
+        public void UpdateReturned(int id)
+        {
+            var rentalInDb = _context.Rentals.SingleOrDefault(r => r.Id == id);
+            rentalInDb.DateReturned = DateTime.Now;
+
+            _context.Movies.SingleOrDefault(m => m.Id == rentalInDb.MovieId).NumberAvailable++;
+
+            _context.SaveChanges();
         }
     }
 }

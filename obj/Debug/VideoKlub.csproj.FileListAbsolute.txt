@@ -122,3 +122,14 @@ C:\Projects\VideoKlub\VideoKlub\bin\System.Web.Http.WebHost.xml
 C:\Projects\VideoKlub\VideoKlub\obj\Debug\VideoKlub.Migrations.Rental.resources
 C:\Projects\VideoKlub\VideoKlub\obj\Debug\VideoKlub.Migrations.typeOfUserIDChanged.resources
 C:\Projects\VideoKlub\VideoKlub\obj\Debug\VideoKlub.Migrations.datesAddToRentals.resources
+C:\Projects\VideoKlub\VideoKlub\obj\Debug\VideoKlub.csprojAssemblyReference.cache
+C:\Projects\VideoKlub\VideoKlub\bin\AutoMapper.dll
+C:\Projects\VideoKlub\VideoKlub\bin\System.ValueTuple.dll
+C:\Projects\VideoKlub\VideoKlub\bin\AutoMapper.pdb
+C:\Projects\VideoKlub\VideoKlub\bin\AutoMapper.xml
+C:\Projects\VideoKlub\VideoKlub\bin\System.ValueTuple.xml
+C:\Projects\VideoKlub\VideoKlub\obj\Debug\VideoKlub.Migrations.UsersAddedToRentals.resources
+C:\Projects\VideoKlub\VideoKlub\obj\Debug\VideoKlub.Migrations.UsersDeletedFromTbl.resources
+C:\Projects\VideoKlub\VideoKlub\obj\Debug\VideoKlub.Migrations.UsersAddedToRentals1.resources
+C:\Projects\VideoKlub\VideoKlub\obj\Debug\VideoKlub.Migrations.UsersDeletedFromTbl1.resources
+C:\Projects\VideoKlub\VideoKlub\obj\Debug\VideoKlub.Migrations.UsersAddedToRentals2.resources

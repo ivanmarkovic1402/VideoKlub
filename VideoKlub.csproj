@@ -45,12 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=8.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.8.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -174,6 +180,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\MappingProfile.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -184,7 +191,9 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Controllers\RentalsController.cs" />
+    <Compile Include="Dtos\MovieDto.cs" />
     <Compile Include="Dtos\RentalDto.cs" />
+    <Compile Include="Dtos\UserDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -228,6 +237,26 @@
     <Compile Include="Migrations\202010121417091_datesAddToRentals.Designer.cs">
       <DependentUpon>202010121417091_datesAddToRentals.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010130853503_UsersAddedToRentals.cs" />
+    <Compile Include="Migrations\202010130853503_UsersAddedToRentals.Designer.cs">
+      <DependentUpon>202010130853503_UsersAddedToRentals.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010130857509_UsersDeletedFromTbl.cs" />
+    <Compile Include="Migrations\202010130857509_UsersDeletedFromTbl.Designer.cs">
+      <DependentUpon>202010130857509_UsersDeletedFromTbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010130904268_UsersAddedToRentals1.cs" />
+    <Compile Include="Migrations\202010130904268_UsersAddedToRentals1.Designer.cs">
+      <DependentUpon>202010130904268_UsersAddedToRentals1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010130907551_UsersDeletedFromTbl1.cs" />
+    <Compile Include="Migrations\202010130907551_UsersDeletedFromTbl1.Designer.cs">
+      <DependentUpon>202010130907551_UsersDeletedFromTbl1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010130911493_UsersAddedToRentals2.cs" />
+    <Compile Include="Migrations\202010130911493_UsersAddedToRentals2.Designer.cs">
+      <DependentUpon>202010130911493_UsersAddedToRentals2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -242,6 +271,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\MovieFormViewModel.cs" />
     <Compile Include="ViewModels\MovieRentalViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -302,6 +332,8 @@
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Movies\MovieForm.cshtml" />
     <Content Include="Views\Rentals\NewRental.cshtml" />
+    <Content Include="Views\Rentals\ListOfRentals.cshtml" />
+    <Content Include="Views\Shared\_Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -349,6 +381,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010121417091_datesAddToRentals.resx">
       <DependentUpon>202010121417091_datesAddToRentals.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010130853503_UsersAddedToRentals.resx">
+      <DependentUpon>202010130853503_UsersAddedToRentals.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010130857509_UsersDeletedFromTbl.resx">
+      <DependentUpon>202010130857509_UsersDeletedFromTbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010130904268_UsersAddedToRentals1.resx">
+      <DependentUpon>202010130904268_UsersAddedToRentals1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010130907551_UsersDeletedFromTbl1.resx">
+      <DependentUpon>202010130907551_UsersDeletedFromTbl1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010130911493_UsersAddedToRentals2.resx">
+      <DependentUpon>202010130911493_UsersAddedToRentals2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

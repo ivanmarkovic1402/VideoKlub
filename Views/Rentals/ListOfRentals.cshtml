@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "ListOfRentals";
+}
+
+<h2>ListOfRentals</h2>
+
+<table id="listOfRentalsTable" class="table table-brodered table table-striped">
+    <thead>
+        <tr>
+            <th>Movie Name</th>
+            <th>Number Available</th>
+            <th>Movie Date Rented</th>
+            <th>Movie Date Returned</th>
+            <th>Rented by User</th>
+            <th>Return</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+
+            var table = $("#listOfRentalsTable");
+            $.ajax({
+                url: "/Api/Rentals",
+                type: "GET",
+                success: function (res) {
+                    $.each(res, function (index, elem) {
+                        console.log(elem);
+                        var dateReturned;
+                        var disabled;
+
+                        if (elem.DateReturned !== null) {
+                            dateReturned = elem.DateReturned;
+                            disabled="disabled"
+                        } else {
+                            dateReturned = "<span style='color:red'>Not returned</span>";
+                        }
+                        table.append("<tr><td>" + elem.Movies.Name + "</td><td>" + elem.Movies.NumberAvailable + "</td><td>" + dateReturned + "</td><td>" + elem.DateRented + "</td><td>" + elem.User.Email + "</td><td><button data-id=" + elem.Id + " class=btn btn-warning " + disabled + ">Return</button><td></tr>")
+                    });
+                }
+            });
+
+
+            $("#listOfRentalsTable tbody").on('click', 'button', function () {
+                var id = $(this).attr("data-id");
+
+                $.ajax({
+                    url: "/Api/Rentals/" + id,
+                    type: "PUT",
+                    success: function () {
+                        location.reload();
+                    }
+                });
+            });
+         
+        });
+
+
+    </script>    
+}

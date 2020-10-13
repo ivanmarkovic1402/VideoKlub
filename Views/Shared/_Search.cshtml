@@ -1,0 +1,15 @@
+﻿<div class="row">
+    <div class="col-md-4 pull-right">
+        @using (Html.BeginForm("Search", "Movies"))
+        {
+            <div class="form-group">
+                <div class="input-group" id="searchGigs">
+                    @*@Html.TextBoxFor(m => m.SearchTerm, new { @class = "form-control", placeholder = "Search for movies" })*@
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </span>
+                </div>
+            </div>
+        }
+    </div>
+</div>

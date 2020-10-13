@@ -30,5 +30,10 @@ namespace VideoKlub.Controllers
 
             return View("NewRental", viewModel);
         }
+
+        public ViewResult ListOfRentals()
+        {
+            return View();
+        }
     }
 }
