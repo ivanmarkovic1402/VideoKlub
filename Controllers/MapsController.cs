@@ -5,7 +5,7 @@ using VideoKlub.Models;
 
 namespace VideoKlub.Controllers
 {
-    public class MapsController : Controller
+	public class MapsController : Controller
 	{
 	
 		[HttpGet]
