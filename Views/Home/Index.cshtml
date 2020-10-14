@@ -38,7 +38,7 @@
                 <td>@movie.NumberAvailable</td>
                 <td>@String.Format("{0:dd/MM/yyyy}", movie.DateAdded)</td>
 
-                @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || movie.AddedByUser == User.Identity.GetUserId()))
+                @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || movie.UserId == User.Identity.GetUserId()))
                 {
                     <td>@Html.ActionLink("Edit", "Edit", "Movies", new { id = movie.Id }, null)</td>
                     <td>
@@ -76,21 +76,19 @@
                     type: "GET",
                     data: { search: search },
                     success: function (res) {
-                        console.log(res);
-                        $("#searchResult").append("<table class='table table-bordered'><thead><tr><th>Movie Name</th><th>Number In Stock</th><th>Numbar Available</th></thead>");
+                        $("#searchResult").append("<table class='table table-bordered'><thead><tr><th>Movie Name</th><th>Genre</th><th>Number In Stock</th><th>Numbar Available</th><th>Added By User</th></thead>");
                         if (res.length == 0) {
-                            $("#searchResult table").append("<tbody><tr><td colspan='3'>No movies under that name</td></tr></tbody>");
+                            $("#searchResult table").append("<tbody><tr><td colspan='5'>No movie, genre or user under that name</td></tr></tbody>");
                         } else {
                             for (i = 0; i < res.length; i++)
                             {
-                                $("#searchResult table").append("<tbody><tr><td>" + res[i].Name + "</td><td>" + res[i].NumberInStock + "</td><td>" + res[i].NumberAvailable + "</td></tr></tbody>");
+                                $("#searchResult table").append("<tbody><tr><td>" + res[i].Name + "</td><td>" + res[i].Genre.Name + "</td><td>" + res[i].NumberInStock + "</td><td>" + res[i].NumberAvailable + "</td><td>" + res[i].User.Email + "</td></tr></tbody>");
                             }
                         }
 
                         $("#searchResult").append("</table>");
                     },
                     error: function (res) {
-                        console.log(res);
 
                         alert("Failed");
                     }

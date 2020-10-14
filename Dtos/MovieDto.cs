@@ -26,6 +26,7 @@ namespace VideoKlub.Dtos
         [Display(Name = "Genre")]
         public int GenreId { get; set; }
 
-        public string AddedByUser { get; set; }
+        public string UserId { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }

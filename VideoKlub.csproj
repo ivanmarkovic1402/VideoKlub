@@ -259,6 +259,10 @@
     <Compile Include="Migrations\202010130911493_UsersAddedToRentals2.Designer.cs">
       <DependentUpon>202010130911493_UsersAddedToRentals2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010141405504_movieModelChanged.cs" />
+    <Compile Include="Migrations\202010141405504_movieModelChanged.Designer.cs">
+      <DependentUpon>202010141405504_movieModelChanged.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -402,6 +406,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010130911493_UsersAddedToRentals2.resx">
       <DependentUpon>202010130911493_UsersAddedToRentals2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010141405504_movieModelChanged.resx">
+      <DependentUpon>202010141405504_movieModelChanged.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -133,3 +133,4 @@ C:\Projects\VideoKlub\VideoKlub\obj\Debug\VideoKlub.Migrations.UsersDeletedFromT
 C:\Projects\VideoKlub\VideoKlub\obj\Debug\VideoKlub.Migrations.UsersAddedToRentals1.resources
 C:\Projects\VideoKlub\VideoKlub\obj\Debug\VideoKlub.Migrations.UsersDeletedFromTbl1.resources
 C:\Projects\VideoKlub\VideoKlub\obj\Debug\VideoKlub.Migrations.UsersAddedToRentals2.resources
+C:\Projects\VideoKlub\VideoKlub\obj\Debug\VideoKlub.Migrations.movieModelChanged.resources

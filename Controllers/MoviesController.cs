@@ -60,7 +60,7 @@ namespace VideoKlub.Controllers
             {
                 movie.DateAdded = DateTime.Now;
                 movie.NumberAvailable = movie.NumberInStock;
-                movie.AddedByUser = User.Identity.GetUserId();
+                movie.UserId = User.Identity.GetUserId();
 
                 _context.Movies.Add(movie);
             }
