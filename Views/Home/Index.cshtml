@@ -51,7 +51,6 @@
                     if (User.IsInRole("Admin"))
                     {
                         <td>
-                            @*<button id="movie-id-@movie.Id" data-id="@movie.Id" class="btn btn-default" data-toggle="modal" data-target="#myModal">Rent</button>*@
                             <a href="@Url.Action("New", "Rentals", new {id = movie.Id})" class="btn btn-default">Rent</a>
                         </td>
                     }
@@ -65,28 +64,39 @@
 
 @section scripts
 {
-        <script>
+    <script>
 
-             $(document).ready(function () {
-                 $('#searchBtn').on("click", function () {
-                     var search = $("#search").val();
-                     var searchResult = "";
-                     $("#searchResult").html("");
-                     $.ajax({
-                         url: "/Api/Search/",
-                         type: "GET",
-                         data: { search:search },
-                         success: function (res) {
-                             $("#searchResult").append("<table class='table table-bordered'><thead><tr><th>Movie Name</th><th>Number In Stock</th><th>Numbar Available</th><thead><tbody></tr></thead><tr><td>" + res.Name + "</td><td>" + res.NumberInStock + "</td><td>" + res.NumberAvailable + "</td></tr></tbody></table>");
-                         },
-                         error: function (res) {
-                             console.log(res);
+        $(document).ready(function () {
+            $('#searchBtn').on("click", function () {
+                var search = $("#search").val();
+                var searchResult = "";
+                $("#searchResult").html("");
+                $.ajax({
+                    url: "/Api/Search/",
+                    type: "GET",
+                    data: { search: search },
+                    success: function (res) {
+                        console.log(res);
+                        $("#searchResult").append("<table class='table table-bordered'><thead><tr><th>Movie Name</th><th>Number In Stock</th><th>Numbar Available</th></thead>");
+                        if (res.length == 0) {
+                            $("#searchResult table").append("<tbody><tr><td colspan='3'>No movies under that name</td></tr></tbody>");
+                        } else {
+                            for (i = 0; i < res.length; i++)
+                            {
+                                $("#searchResult table").append("<tbody><tr><td>" + res[i].Name + "</td><td>" + res[i].NumberInStock + "</td><td>" + res[i].NumberAvailable + "</td></tr></tbody>");
+                            }
+                        }
 
-                             alert("Failed");
-                         }
-                     })
-                });
-             });
+                        $("#searchResult").append("</table>");
+                    },
+                    error: function (res) {
+                        console.log(res);
 
-        </script>
+                        alert("Failed");
+                    }
+                })
+            });
+        });
+
+    </script>
     }

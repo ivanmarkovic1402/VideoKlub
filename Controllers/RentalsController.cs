@@ -5,6 +5,7 @@ using VideoKlub.ViewModels;
 
 namespace VideoKlub.Controllers
 {
+    [Authorize]
     public class RentalsController : Controller
     {
         private ApplicationDbContext _context;

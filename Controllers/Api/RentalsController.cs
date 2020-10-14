@@ -10,6 +10,7 @@ using VideoKlub.Models;
 
 namespace VideoKlub.Controllers.Api
 {
+    [Authorize]
     public class RentalsController : ApiController
     {
         private ApplicationDbContext _context;
@@ -22,9 +23,6 @@ namespace VideoKlub.Controllers.Api
         [HttpGet]
         public IEnumerable<RentalDto> GetRentals()
         {
-            //var rentals = _context.Rentals
-            //                .Include(r => r.Movies)
-            //                .Include(r => r.User);
 
             var rentalsDto = _context.Rentals.Include(r => r.Movies).Include(r => r.User).ToList().Select(Mapper.Map<Rental, RentalDto>);
 
@@ -55,8 +53,6 @@ namespace VideoKlub.Controllers.Api
         {
             var rental = new Rental();
 
-            //var user = _context.Users.Where(u => u.Id == rentalDto.UserId); 
-
             rental.MovieId = rentalDto.MovieId;
             rental.UserId = rentalDto.UserId;
             rental.DateRented = DateTime.Now;
@@ -75,14 +71,20 @@ namespace VideoKlub.Controllers.Api
         }
 
         [HttpPut]
-        public void UpdateReturned(int id)
+        public IHttpActionResult UpdateReturned(int id)
         {
             var rentalInDb = _context.Rentals.SingleOrDefault(r => r.Id == id);
+
+            if (rentalInDb.DateReturned != null)
+                return BadRequest("This rental has already been returned.");
+
             rentalInDb.DateReturned = DateTime.Now;
 
             _context.Movies.SingleOrDefault(m => m.Id == rentalInDb.MovieId).NumberAvailable++;
 
             _context.SaveChanges();
+
+            return Ok();
         }
     }
 }

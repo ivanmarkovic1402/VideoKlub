@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using System.Net;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using VideoKlub.Models;
 
@@ -14,13 +14,17 @@ namespace VideoKlub.Controllers.Api
         }
 
         [HttpGet]
-        public Movie GetMovies(string search)
+        public IEnumerable<Movie> GetMovies(string search)
         {
-            var movie = _context.Movies.SingleOrDefault(m => m.Name == search);
-            if (movie == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+            //var movies = from m in _context.Movies
+            //             where m.Name.Contains(search)
+            //             select m;
 
-            return movie;
+            var movies = _context.Movies.Where(m => m.Name.Contains(search)).ToList();
+            //if (movies == null)
+            //    throw new HttpResponseException(HttpStatusCode.NotFound);
+
+            return movies;
         }
     }
 }
